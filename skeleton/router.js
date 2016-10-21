@@ -1,6 +1,7 @@
 class Router {
-  constructor(node) {
+  constructor(node, routes) {
     this.node = node;
+    this.routes = routes;
   }
 
   start() {
@@ -13,7 +14,8 @@ class Router {
   }
 
   activeRoute() {
-    return window.location.hash.slice(1);
+    let hash = window.location.hash.slice(1);
+    return this.routes[hash];
   }
 
   render() {

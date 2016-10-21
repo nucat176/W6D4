@@ -1,4 +1,5 @@
 let Router = require("./router.js");
+let Inbox = require("./inbox.js");
 
 document.addEventListener("DOMContentLoaded", () => {
   let sidebarEls = document.querySelectorAll(".sidebar-nav li");
@@ -11,7 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   let pageContent = document.querySelector(".content");
-  let router = new Router(pageContent);
+  let router = new Router(pageContent, routes);
   router.start();
 
 });
+
+let routes = {
+  inbox: new Inbox
+};

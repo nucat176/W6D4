@@ -45,6 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	let Router = __webpack_require__(1);
+	let Inbox = __webpack_require__(2);
 
 	document.addEventListener("DOMContentLoaded", () => {
 	  let sidebarEls = document.querySelectorAll(".sidebar-nav li");
@@ -57,10 +58,14 @@
 	  });
 
 	  let pageContent = document.querySelector(".content");
-	  let router = new Router(pageContent);
+	  let router = new Router(pageContent, routes);
 	  router.start();
 
 	});
+
+	let routes = {
+	  inbox: new Inbox
+	};
 
 
 /***/ },
@@ -68,8 +73,9 @@
 /***/ function(module, exports) {
 
 	class Router {
-	  constructor(node) {
+	  constructor(node, routes) {
 	    this.node = node;
+	    this.routes = routes;
 	  }
 
 	  start() {
@@ -82,7 +88,8 @@
 	  }
 
 	  activeRoute() {
-	    return window.location.hash.slice(1);
+	    let hash = window.location.hash.slice(1);
+	    return this.routes[hash];
 	  }
 
 	  render() {
@@ -96,6 +103,20 @@
 	}
 
 	module.exports = Router;
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	class Inbox {
+	  render(){
+	    let list = document.createElement('ul');
+	    list.className = 'messages';
+	    list.innerHTML = "An Inbox Message";
+	    return list;
+	  }
+	}
 
 
 /***/ }
